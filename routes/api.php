@@ -21,3 +21,10 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');
  
+Route::middleware(['jwt.verify'])->group(function(){
+    Route::get('daily_scrum', "DailyController@index"); 
+    Route::get('daily_scrum/{limit}/{offset}', "DailyController@getAll"); 
+    Route::post('daily_scrum', 'DailyController@store'); 
+    Route::delete('daily_scrum/{id}', "DailyController@delete"); 
+});
+
